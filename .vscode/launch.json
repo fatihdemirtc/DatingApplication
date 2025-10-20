@@ -5,16 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C#: API Debug",
-            "type": "dotnet",
+            "type": "chrome",
             "request": "launch",
-            "projectPath": "${workspaceFolder}/API/API.csproj"
+            "name": "ng",
+            "url": "https://localhost:4200",
+            "webRoot": "${workspaceFolder}/Client",
+             "preLaunchTask": "ng serve"
         },
         {
             "name": ".NET Core Attach",
             "type": "coreclr",
-            "request": "attach"
+            "request": "attach",
+
         },
-    
     ]
 }
