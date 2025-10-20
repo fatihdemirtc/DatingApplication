@@ -14,21 +14,13 @@ export class Nav {
 
   protected accountService = inject(AccountService);
   private router = inject(Router);
-  private toast=inject(ToastService);
   protected creds: any = {};
 
 
   login() {
-    this.accountService.login(this.creds).subscribe({
-      next: response => {
-        this.router.navigateByUrl('/members');
-        this.toast.success('Login successful');
-        this.creds = {};
-      },
-      error: error => {
-        this.toast.error(error.error);
-      }
-    });
+    this.accountService.login(this.creds).subscribe(response => {
+      this.router.navigateByUrl('/members');
+    })
   }
   logout() {
     this.accountService.logout();

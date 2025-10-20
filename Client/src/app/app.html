@@ -1,4 +1,8 @@
-<app-nav ></app-nav>
-<div [ngClass]="{'container mt-24 mx-auto': !(router.url.includes('/'))}">
-  <router-outlet></router-outlet>
+<app-nav />
+<div 
+    [class.mt-24]="router.url !== '/'"
+    [class.container]="router.url !== '/'"
+    [class.mx-auto]="router.url !== '/'"
+>
+    <router-outlet />
 </div>

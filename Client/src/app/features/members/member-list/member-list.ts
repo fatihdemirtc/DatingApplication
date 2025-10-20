@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './member-list.css'
 })
 export class MemberList {
-
+constructor() {}
 }

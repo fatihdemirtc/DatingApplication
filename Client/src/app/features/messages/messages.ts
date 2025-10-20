@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './messages.css'
 })
 export class Messages {
-
+constructor() {}
 }
