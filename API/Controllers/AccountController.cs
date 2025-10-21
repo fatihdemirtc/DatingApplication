@@ -17,17 +17,7 @@ public class AccountController(AppDbContext context,ITokenService tokenService):
     {
         if (await EmailExists(registerDto.Email)) return BadRequest("Email already taken");
 
-        using var hmac = new HMACSHA512();
-        var user = new AppUser
-        {
-            DisplayName = registerDto.DisplayName,
-            Email = registerDto.Email,
-          
-        };
-        context.Users.Add(user);
-        await context.SaveChangesAsync();
-
-        return user.ToDto(tokenService);
+        return null;
 
     }
 
