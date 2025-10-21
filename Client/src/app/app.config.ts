@@ -7,13 +7,14 @@ import { InitService } from '../core/services/init-service';
 import { lastValueFrom } from 'rxjs/internal/lastValueFrom';
 import { errorInterceptor } from '../core/interceptors/error-interceptor';
 import { jwtInterceptor } from './jwt-interceptor';
+import { loadingInterceptor } from '../core/interceptors/loading-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideRouter(routes,withViewTransitions()),
-    provideHttpClient(withInterceptors([errorInterceptor,jwtInterceptor])),
+    provideRouter(routes, withViewTransitions()),
+    provideHttpClient(withInterceptors([errorInterceptor, jwtInterceptor, loadingInterceptor])),
     provideAppInitializer(async () => {
       // Initialization logic can go here
 
@@ -31,7 +32,7 @@ export const appConfig: ApplicationConfig = {
             }
             resolve();
           }
-        },500)
+        }, 500)
       })
     })
 
