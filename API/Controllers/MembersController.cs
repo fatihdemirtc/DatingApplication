@@ -2,6 +2,7 @@ using API.Data;
 using API.DTOs;
 using API.Entity;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,9 +14,9 @@ namespace API.Controllers
         IPhotoService photoService) : BaseApiController
     {
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<Member>>> GetMembers()
+        public async Task<ActionResult<ActionResult<IReadOnlyList<Member>>>> GetMembersAsync([FromQuery] PagingParams pagingParams)
         {
-            var members = await memberRepository.GetMembersAsync();
+            var members = await memberRepository.GetMembersAsync(pagingParams);
             return Ok(members);
         }
 
