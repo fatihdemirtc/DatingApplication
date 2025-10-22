@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [Authorize]
-    public class MembersController(IMemberRepository memberRepository) : BaseApiController
+    public class MembersController(IMemberRepository memberRepository,
+        IPhotoService photoService) : BaseApiController
     {
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<Member>>> GetMembers()
@@ -32,7 +33,7 @@ namespace API.Controllers
         {
             return Ok(await memberRepository.GetPhotosByMemberAsync(id));
         }
-        
+
         [HttpPut]
         public async Task<ActionResult> UpdateMember(MemberUpdateDto memberUpdateDto)
         {
@@ -54,6 +55,44 @@ namespace API.Controllers
             if (await memberRepository.SaveAllAsync()) return NoContent();
 
             return BadRequest("Failed to update member");
+        }
+
+        [HttpPost("add-photo")]
+        public async Task<ActionResult<Photo>> AddPhoto([FromForm]IFormFile file)
+        {
+            var memberId = User.GetMemberId();
+            var member = await memberRepository.GetMemberByIdAsync(memberId);
+
+            if (member == null) return BadRequest("Could not get member");
+
+            var result = await photoService.UploadPhotoAsync(file);
+
+            if (result.Error != null) return BadRequest(result.Error.Message);
+
+            var photo = new Photo
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId,
+                MemberId = memberId
+            };
+
+            if(member.ImageUrl == null)
+            {
+                member.ImageUrl = photo.Url;
+                member.User.ImageUrl = photo.Url;
+            }
+
+            member.Photos.Add(photo);
+
+            if (await memberRepository.SaveAllAsync())
+            {
+                return CreatedAtAction(
+                    nameof(GetMemberPhotos),
+                    new { id = memberId },
+                    photo);
+            }
+
+            return BadRequest("Problem adding photo");
         }
     }
 }
