@@ -1,6 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { MemberService } from '../../../../core/services/member-service';
 import { Member, Photo } from '../../../../types/member';
 import { AccountService } from '../../../../core/services/account-service';
@@ -19,7 +18,7 @@ export class MemberPhotos implements OnInit {
   protected memberService = inject(MemberService);
   protected accountService = inject(AccountService);
   private route = inject(ActivatedRoute);
- protected photos = signal<Photo[]>([]);
+  protected photos = signal<Photo[]>([]);
   protected loading = signal(false);
 
   ngOnInit(): void {
@@ -30,13 +29,16 @@ export class MemberPhotos implements OnInit {
       })
     }
   }
-onUploadImage(file: File) {
+  onUploadImage(file: File) {
     this.loading.set(true);
     this.memberService.uploadPhoto(file).subscribe({
       next: photo => {
         this.memberService.editMode.set(false);
         this.loading.set(false);
-        this.photos.update(photos => [...photos, photo])
+        this.photos.update(photos => [...photos, photo]);
+        if (!this.memberService.member()?.imageUrl) {
+          this.setMainLocalPhoto(photo);
+        }
       },
       error: error => {
         console.log('Error uploading image: ', error);
@@ -48,13 +50,7 @@ onUploadImage(file: File) {
   setMainPhoto(photo: Photo) {
     this.memberService.setMainPhoto(photo).subscribe({
       next: () => {
-        const currentUser = this.accountService.currentUser();
-        if (currentUser) currentUser.imageUrl = photo.url;
-        this.accountService.setCurrentUser(currentUser as User);
-        this.memberService.member.update(member => ({
-          ...member,
-          imageUrl: photo.url
-        }) as Member)
+        this.setMainLocalPhoto(photo);
       }
     })
   }
@@ -66,5 +62,15 @@ onUploadImage(file: File) {
       }
     })
   }
-  
+
+  private setMainLocalPhoto(photo: Photo) {
+    const currentUser = this.accountService.currentUser();
+    if (currentUser) currentUser.imageUrl = photo.url;
+    this.accountService.setCurrentUser(currentUser as User);
+    this.memberService.member.update(member => ({
+      ...member,
+      imageUrl: photo.url
+    }) as Member)
+  }
+
 }

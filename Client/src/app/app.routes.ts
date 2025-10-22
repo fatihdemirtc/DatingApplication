@@ -12,7 +12,7 @@ import { memberResolver } from './features/members/member-resolver';
 import { preventUnsavedChangesGuard } from '../core/guards/prevent-unsaved-changes-guard';
 
 export const routes: Routes = [
-    { path: 'register', component: Home },
+  { path: '', component: Home },
     {
         path: '',
         canActivate: [authGuard],
