@@ -32,7 +32,7 @@ export class AccountService {
     return this.http.post<User>(this.baseUrl + 'account/login', creds).pipe(
       tap(user => {
         if (user) {
-           this.setCurrentUser(user);
+          this.setCurrentUser(user);
         }
       })
     )
@@ -40,6 +40,7 @@ export class AccountService {
 
   logout() {
     localStorage.removeItem('user');
+    localStorage.removeItem('filters');
     this.currentUser.set(null);
   }
 }
