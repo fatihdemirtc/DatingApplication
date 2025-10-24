@@ -10,9 +10,11 @@ import { MemberPhotos } from './features/members/member-photos/member-photos';
 import { MemberProfile } from './features/members/member-profile/member-profile';
 import { memberResolver } from './features/members/member-resolver';
 import { preventUnsavedChangesGuard } from '../core/guards/prevent-unsaved-changes-guard';
+import { Messages } from './features/messages/messages';
+import { Lists } from './features/lists/lists';
 
 export const routes: Routes = [
-  { path: '', component: Home },
+    { path: '', component: Home },
     {
         path: '',
         canActivate: [authGuard],
@@ -34,6 +36,8 @@ export const routes: Routes = [
                     { path: 'messages', component: MemberMessages, title: 'Messages' },
                 ]
             },
+            { path: 'lists', component: Lists },
+            { path: 'messages', component: Messages },
 
             { path: 'server-error', component: ServerError },
             { path: '**', component: NotFound },
