@@ -61,6 +61,7 @@ public class AccountController(UserManager<AppUser> userManager, ITokenService t
         return await user.ToDto(tokenService);
     }
 
+    [HttpPost("refresh-token")]
     public async Task<ActionResult<UserDto>> RefreshToken()
     {
         var refreshToken = Request.Cookies["refreshToken"];
@@ -76,7 +77,7 @@ public class AccountController(UserManager<AppUser> userManager, ITokenService t
 
         return await user.ToDto(tokenService);
     }
-    
+
     private async Task SetRefreshTokenCookie(AppUser user)
     {
         var refreshToken = tokenService.GenerateRefreshToken();
