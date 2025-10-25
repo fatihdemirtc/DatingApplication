@@ -1,16 +1,15 @@
-import { Component, HostListener, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, HostListener, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { EditableMember, Member } from '../../../../types/member';
 import { FormsModule, NgForm } from '@angular/forms';
+import { TimeAgoPipe } from '../../../../core/pipes/time-ago-pipe-pipe';
 import { AccountService } from '../../../../core/services/account-service';
 import { MemberService } from '../../../../core/services/member-service';
 import { ToastService } from '../../../../core/services/toast-service';
-import { TimeAgoPipe } from '../../../../core/pipes/time-ago-pipe-pipe';
+import { EditableMember, Member } from '../../../../types/member';
 
 @Component({
   selector: 'app-member-profile',
-  imports: [DatePipe, FormsModule,TimeAgoPipe],
+  imports: [DatePipe, FormsModule, TimeAgoPipe],
   templateUrl: './member-profile.html',
   styleUrl: './member-profile.css'
 })
@@ -56,6 +55,7 @@ export class MemberProfile implements OnInit, OnDestroy {
         this.editForm?.reset(updatedMember);
       }
     })
+
   }
 
   ngOnDestroy(): void {
