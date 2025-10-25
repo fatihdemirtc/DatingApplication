@@ -6,10 +6,10 @@
     "Client": {
       "projectType": "application",
       "schematics": {
-        "@angular/build:component": {
+       "@schematics/angular:component": {
           "skipTests": true,
-          "path": "src/app"
-        }        ,
+          "path": "src"
+        },
         "@schematics/angular:service": {
           "skipTests": true,
           "path": "src/core/services"
@@ -18,9 +18,21 @@
           "skipTests": true,
           "path": "src/core/guards"
         },
-         "@schematics/angular:pipe": {
+        "@schematics/angular:interceptor": {
+          "skipTests": true,
+          "path": "src/core/interceptors"
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true,
+          "path": "src"
+        },
+        "@schematics/angular:pipe": {
           "skipTests": true,
           "path": "src/core/pipes"
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true,
+          "path": "src/shared/directives"
         }
       },
       "root": "",

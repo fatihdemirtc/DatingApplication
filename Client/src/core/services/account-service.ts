@@ -16,35 +16,64 @@ export class AccountService {
   baseUrl = environment.BASE_API_URL;
 
   register(creds: RegisterCreds) {
-    return this.http.post<User>(this.baseUrl + 'account/register', creds).pipe(
-      tap(user => {
-        if (user) {
-          this.setCurrentUser(user);
-        }
-      })
-    )
+    return this.http.post<User>(this.baseUrl + 'account/register', creds,
+      { withCredentials: true }).pipe(
+        tap(user => {
+          if (user) {
+            this.setCurrentUser(user);
+            this.startTokenRefreshInterval();
+          }
+        })
+      )
   }
 
-  setCurrentUser(user: User | null) {
-    localStorage.setItem('user', JSON.stringify(user));
-    this.currentUser.set(user)
+  setCurrentUser(user: User) {
+    user.roles = this.getRolesFromToken(user);
+    this.currentUser.set(user);
+    this.likesService.getLikeIds();
   }
 
   login(creds: any) {
-    return this.http.post<User>(this.baseUrl + 'account/login', creds).pipe(
-      tap(user => {
-        if (user) {
-          this.setCurrentUser(user);
-          this.likesService.getLikeIds();
-        }
-      })
-    )
+    return this.http.post<User>(this.baseUrl + 'account/login', creds,
+      { withCredentials: true }).pipe(
+        tap(user => {
+          if (user) {
+            this.setCurrentUser(user);
+            this.startTokenRefreshInterval();
+          }
+        })
+      )
   }
 
-  logout() {
-    localStorage.removeItem('user');
+  refreshToken() {
+    return this.http.post<User>(this.baseUrl + 'account/refresh-token', {},
+      { withCredentials: true })
+  }
+
+  startTokenRefreshInterval() {
+    setInterval(() => {
+      this.http.post<User>(this.baseUrl + 'account/refresh-token', {},
+        { withCredentials: true }).subscribe({
+          next: user => {
+            this.setCurrentUser(user)
+          },
+          error: () => {
+            this.logout()
+          }
+        })
+    }, 5 * 60 * 1000)
+  }
+
+  logout() {    
     localStorage.removeItem('filters');
     this.likesService.clearLikeIds();
     this.currentUser.set(null);
+  }
+
+  private getRolesFromToken(user: User): string[] {
+    const payload = user.token.split('.')[1];
+    const decoded = atob(payload);
+    const jsonPayload = JSON.parse(decoded);
+    return Array.isArray(jsonPayload.role) ? jsonPayload.role : [jsonPayload.role]
   }
 }
