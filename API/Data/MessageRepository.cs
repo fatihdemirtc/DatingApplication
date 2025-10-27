@@ -87,9 +87,4 @@ public class MessageRepository(AppDbContext context) : IMessageRepository
             .Select(MessageExtensions.ToDtoProjection())
             .ToListAsync();
     }
-
-    public async Task<bool> SaveAllAsync()
-    {
-        return await context.SaveChangesAsync() > 0;
-    }
 }
