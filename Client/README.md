@@ -23,7 +23,47 @@ A modern, responsive Angular frontend for the Dating Application, featuring real
 - Admin dashboard
 - Mobile-responsive design
 
-## Development server
+# Dating Application - Angular Client
+
+Modern Angular frontend built following Neil Cummings' course, showcasing best practices in Angular development, real-time features, and responsive design.
+
+## Course Implementation Features
+
+### Angular Fundamentals
+- Standalone Components architecture
+- Signals for state management
+- Angular 20.3.6 latest features
+- TypeScript best practices
+
+### Authentication & Security
+- JWT token handling with interceptors
+- Persistent login state
+- Route guards and protection
+- Error handling and interception
+
+### UI/UX Features
+- Responsive design with DaisyUI and Tailwind
+- Custom form controls
+- Dynamic form validation
+- Toast notifications
+- Loading indicators
+- Route animations
+
+### Real-time Features
+- SignalR integration
+- Live chat implementation
+- Presence tracking
+- Real-time updates
+
+### Advanced Features
+- Lazy loading
+- Caching strategies
+- Custom pipes
+- Reactive forms
+- File upload with preview
+- Pagination and filtering
+
+## Development Environment
 
 To start a local development server, run:
 

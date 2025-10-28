@@ -1,11 +1,34 @@
 # Dating Application
 
-A full-stack dating application built with ASP.NET Core and Angular, featuring real-time messaging, presence tracking, and comprehensive user interaction features.
+A full-stack dating application built with ASP.NET Core and Angular, based on Neil Cummings' comprehensive course. This project demonstrates modern web development practices with real-time features, secure authentication, and cloud deployment.
 
-## Overview
+## Project Overview
 - `API/`: ASP.NET Core 9.0 backend with Entity Framework Core, SignalR, and JWT authentication
 - `Client/`: Angular frontend with real-time features, signals, and responsive design
 - Docker support for containerized deployment
+- Azure cloud deployment ready
+
+## Course Implementation Features
+- Authentication & Security
+  - JWT token implementation
+  - Password hashing
+  - Secure storage practices
+- Real-time Communication
+  - SignalR integration
+  - Live chat functionality
+  - Presence tracking
+- Modern Angular Features
+  - Signals for state management
+  - Standalone components
+  - Custom form controls
+- Database & ORM
+  - Entity Framework Core
+  - Repository Pattern
+  - SQL Server support
+- Cloud & DevOps
+  - Azure deployment
+  - CI/CD pipeline
+  - Docker containerization
 
 ## Key Features
 - User authentication with JWT and refresh tokens
