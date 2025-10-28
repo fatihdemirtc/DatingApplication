@@ -486,5 +486,5 @@ API/appsettings.json
 API/dating.db*
 Client/ssl/*
 API/appsettings.Development.json
-API/appsettings.Development.json
 API/Data/Migrations/*
+API/appsettings.Development.json
