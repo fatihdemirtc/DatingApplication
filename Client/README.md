@@ -1,6 +1,27 @@
-# Client
+# Dating Application - Angular Client
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
+A modern, responsive Angular frontend for the Dating Application, featuring real-time communication, advanced state management, and comprehensive user features.
+
+## Tech Stack
+
+- Angular 20.3.6
+- TypeScript
+- SignalR client for real-time features
+- JWT authentication with interceptors
+- Angular standalone components
+- Angular signals for state management
+- Bootstrap for responsive design
+- SSL configured for development
+
+## Key Features
+
+- Real-time messaging and presence
+- Photo gallery and management
+- User profile editing
+- Member search and filtering
+- Like functionality
+- Admin dashboard
+- Mobile-responsive design
 
 ## Development server
 

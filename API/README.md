@@ -1,14 +1,18 @@
 # Dating Application API
 
-ASP.NET Core Web API backend for the Dating Application, featuring Entity Framework Core, JWT authentication, and a clean architecture pattern.
+ASP.NET Core Web API backend for the Dating Application, featuring Entity Framework Core, JWT authentication, SignalR for real-time communication, and following clean architecture patterns.
 
 ## Tech Stack
 
 - ASP.NET Core 9.0
 - Entity Framework Core with SQLite
-- JWT Authentication
-- AutoMapper
-- Identity Framework
+- SignalR for real-time features
+- JWT Authentication with refresh tokens
+- AutoMapper for DTO mappings
+- Identity Framework for user management
+- Cloudinary integration for photo storage
+- Repository & Unit of Work patterns
+- Docker support
 
 ## Project Structure
 

@@ -1,8 +1,20 @@
 # Dating Application
 
-A modern dating application built with ASP.NET Core Web API and Angular. This solution consists of two main parts:
-- `API/`: .NET Core backend with Entity Framework Core and JWT authentication
-- `Client/`: Angular frontend with signals and standalone components
+A full-stack dating application built with ASP.NET Core and Angular, featuring real-time messaging, presence tracking, and comprehensive user interaction features.
+
+## Overview
+- `API/`: ASP.NET Core 9.0 backend with Entity Framework Core, SignalR, and JWT authentication
+- `Client/`: Angular frontend with real-time features, signals, and responsive design
+- Docker support for containerized deployment
+
+## Key Features
+- User authentication with JWT and refresh tokens
+- Real-time messaging and presence tracking
+- Profile management with photo upload (Cloudinary)
+- Member search and filtering
+- Like functionality
+- Admin panel for moderation
+- Responsive design
 
 ## Prerequisites
 
